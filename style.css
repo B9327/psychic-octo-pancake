@@ -1,0 +1,8 @@
+/* Existing styles for body, header, board, column, task, etc. */
+
+/* Completed task */
+.task.completed {
+    background-color: #d1ffd6;
+    text-decoration: line-through;
+    opacity: 0.7;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti-Drug Awareness Steps</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #f0f2f5, #d6e0f0);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 25px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header:hover {
+      opacity: 0.9;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      transition: 0.3s;
+    }
+
+    .board {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 500px;
+      background: #ffffffee;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .board h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .task-list {
+      margin: 10px 0;
+      padding: 0;
+    }
+
+    .task {
+      background: #f9f9f9;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .task:hover {
+      transform: scale(1.02);
+      background: #eef2ff;
+    }
+
+    .task.completed {
+      background-color: #d1ffd6;
+      text-decoration: line-through;
+      color: #555;
+    }
+
+    .add-task {
+      display: flex;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px 0 0 6px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+  <header id="page-header">
+    <h1>🚀 Steps to Avoid Drugs</h1>
+    <p>Click on each step as you follow it to stay on track!</p>
+  </header>
+
+  <section class="board">
+    <h2>Steps</h2>
+    <div class="task-list" id="steps-list"></div>
+
+    <div class="add-task">
+      <input type="text" id="step-input" placeholder="Add a new step">
+      <button id="add-step">Add Step</button>
+    </div>
+  </section>
+
+  <script>
+    const stepsList = document.getElementById("steps-list");
+    const stepInput = document.getElementById("step-input");
+    const addStepBtn = document.getElementById("add-step");
+    const header = document.getElementById("page-header");
+
+    // Default steps
+    const defaultSteps = [
+      "Learn about the dangers of drugs",
+      "Say 'No' to peer pressure",
+      "Surround yourself with positive friends",
+      "Find healthy hobbies",
+      "Talk to a trusted adult when in trouble"
+    ];
+
+    // Create a step
+    function createStep(text) {
+      const step = document.createElement("div");
+      step.className = "task";
+      step.textContent = text;
+
+      // Click to toggle completion
+      step.addEventListener("click", () => {
+        step.classList.toggle("completed");
+      });
+
+      return step;
+    }
+
+    // Load default steps
+    defaultSteps.forEach(text => {
+      stepsList.appendChild(createStep(text));
+    });
+
+    // Add new step
+    addStepBtn.addEventListener("click", () => {
+      const text = stepInput.value.trim();
+      if(text !== ""){
+        stepsList.appendChild(createStep(text));
+        stepInput.value = "";
+      }
+    });
+
+    // Press Enter to add step
+    stepInput.addEventListener("keyup", (e) => {
+      if(e.key === "Enter"){
+        addStepBtn.click();
+      }
+    });
+
+    // Click on header changes color
+    header.addEventListener("click", () => {
+      const colors = ["#6a11cb", "#2575fc", "#ff6f61", "#ffb347", "#4caf50"];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      header.style.background = randomColor;
+    });
+  </script>
+</body>
+</html>
+
